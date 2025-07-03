@@ -113,3 +113,35 @@ python copy_table.py \
   --overwrite-dest \
   --validate
 ```
+## Key Features
+
+### For Table Copier (`copy_table.py`)
+
+#### 🛠️ Dynamic Configuration
+- Separate endpoints/regions/profiles for source and destination
+- Environment variable support for credentials
+- Configurable batch size
+
+#### 🧬 Schema Preservation
+- Automatically copies table structure (keys, indexes, billing mode)
+- Handles both local and global secondary indexes
+
+#### 🔐 Safety Features
+- Optional overwrite confirmation (`--overwrite-dest`)
+- Interactive deletion confirmation
+- Item count validation (`--validate`)
+
+#### ⚡ Efficiency
+- Paginated scanning for large tables
+- Batch writing with progress tracking
+- Throttling control mechanisms
+
+#### 🛡️ Error Handling
+- Comprehensive AWS error handling
+- Waiter timeouts for table operations
+- Detailed logging for troubleshooting
+
+#### 🌍 Cross-Environment Support
+- Local-to-local, local-to-cloud, cloud-to-cloud
+- Cross-account and cross-region copying
+- Profile-based authentication
