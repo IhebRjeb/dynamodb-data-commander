@@ -1,6 +1,6 @@
 # DynamoDB Data Commander 🚀
 
-![DynamoDB Logo](https://aws.amazon.com/icons/dynamodb.ico)
+![DynamoDB Logo](https://icon.icepanel.io/AWS/svg/Database/DynamoDB.svg)
 
 A Python CLI toolkit for powerful DynamoDB data operations. Import JSON datasets and copy tables with simple commands.
 
