@@ -51,7 +51,7 @@ python import_data.py \
 | `--batch-size`   | Write batch size (1-25)          | 25                     |
 | `--log-level`    | Logging level (DEBUG/INFO/ERROR) | INFO                   |
 
-## Tools
+## Configurations
 Set credentials via environment variables:
 ```bash
 # For local DynamoDB
