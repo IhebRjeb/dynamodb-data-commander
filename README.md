@@ -51,6 +51,31 @@ python import_data.py \
 | `--batch-size`   | Write batch size (1-25)          | 25                     |
 | `--log-level`    | Logging level (DEBUG/INFO/ERROR) | INFO                   |
 
+- **Table Copier (copy_table.py)**:
+Copy between DynamoDB tables:
+```bash
+python copy_table.py \
+  --source-table TableA \
+  --dest-table TableB \
+  --source-endpoint http://localhost:8000 \
+  --dest-endpoint https://dynamodb.us-west-2.amazonaws.com \
+  --batch-size 25 \
+  --overwrite-dest \
+  --validate
+```
+| Argument           | Description                          | Default                 |
+|--------------------|--------------------------------------|-------------------------|
+| `--source-table`   | Source table name                    | Required                |
+| `--dest-table`     | Destination table name               | Required                |
+| `--source-endpoint`| Source endpoint URL                  | `http://localhost:8000` |
+| `--dest-endpoint`  | Destination endpoint URL             | `http://localhost:8000` |
+| `--source-region`  | Source AWS region                    | `us-west-2`             |
+| `--dest-region`    | Destination AWS region               | `us-west-2`             |
+| `--overwrite-dest` | Overwrite existing destination table | `False`                 |
+| `--validate`       | Validate item counts after copy      | `False`                 |
+| `--batch-size`     | Batch write size                     | `25`                    |
+| `--delete-source`  | Delete source table after copy       | `False`                 |
+
 ## Configurations
 Set credentials via environment variables:
 ```bash
@@ -60,4 +85,31 @@ export AWS_SECRET_ACCESS_KEY=dummy
 
 # For AWS environments
 export AWS_PROFILE=production
+
+# For cross-account copying
+export SOURCE_AWS_ACCESS_KEY_ID=source_key
+export SOURCE_AWS_SECRET_ACCESS_KEY=source_secret
+export DEST_AWS_ACCESS_KEY_ID=dest_key
+export DEST_AWS_SECRET_ACCESS_KEY=dest_secret
+```
+
+## Sample Workflow
+1-Import test data to local DynamoDB:
+```bash
+python import_data.py \
+  --table-name dev-orders \
+  --data-dir ./testdata \
+  --endpoint-url http://localhost:8000
+```
+1-Copy table to production:
+```bash
+python copy_table.py \
+  --source-table dev-orders \
+  --dest-table prod-orders \
+  --source-endpoint http://localhost:8000 \
+  --dest-endpoint https://dynamodb.us-west-2.amazonaws.com \
+  --source-profile dev \
+  --dest-profile prod \
+  --overwrite-dest \
+  --validate
 ```
